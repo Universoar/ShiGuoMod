@@ -631,8 +631,8 @@ function winBatteryDrop()
 			end
 			if entity.Type == EntityType.ENTITY_PICKUP
 				and entity.Variant == PickupVariant.PICKUP_COLLECTIBLE
-				and entity.SubType == itemPool:GetCollectible(ItemPoolType.POOL_BOMB_BUM, entity.SubType) then
-				print(itemPool:GetCollectible(ItemPoolType.POOL_TREASURE))
+				and entity.SubType == itemPool:GetCollectible(ItemPoolType.POOL_BOMB_BUM, false, Random(), entity.SubType) then
+				entity:Remove()
 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, itemPool:GetCollectible(ItemPoolType.POOL_TREASURE), entityPosition, Vector(0,0), nil)
 			end
 		end
