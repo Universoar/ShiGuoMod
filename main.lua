@@ -521,11 +521,9 @@ local sirPeachMaxHeartCache = 8
 function getPeachHeart()
 	local player = Isaac.GetPlayer(0)
 	if player:GetName() == "Peach" then
-		print(player:GetMaxHearts())
 		sirPeachMaxHeartCache = player:GetMaxHearts()
 	end
 end
-
 Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, getPeachHeart, EntityType.ENTITY_PLAYER)
 
 function setSirPeachHeart()
