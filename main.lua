@@ -516,6 +516,16 @@ function sirPeachBuff()
 	end
 end
 
+	--- Cache Peach`s Heart before he died ---
+local sirPeachMaxHeartCache = 8
+function getPeachHeart()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Peach" then
+		sirPeachMaxHeartCache = player:GetMaxHearts()
+	end
+end
+Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, getPeachHeart, EntityType.ENTITY_PLAYER)
+
 function setSirPeachHeart()
 	local player = Isaac.GetPlayer(0)
 	if player:GetName() == "Sir_Peach" 
@@ -528,6 +538,11 @@ Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, setSirPeachHeart)
 	--- Set sirPeach when its enabled for the current level ---
 function setSirPeach()
 	sirPeachEnable = 0
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Peach" 
+	and player:GetMaxHearts() ~= 8 then
+		player:AddMaxHearts(sirPeachMaxHeartCache - 2)
+	end
 end
 Mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, setSirPeach)
 
