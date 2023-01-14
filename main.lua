@@ -4,8 +4,10 @@ local game = Game()
 local shand = { -- Change everywhere to match your character. No spaces!
     DAMAGE = -1, -- These are all relative to Isaac's base stats.
     SPEED = 0,
-    SHOTSPEED = 0,
+    SHOTSPEED = -0.15,
     TEARHEIGHT = 0,
+	MaxFireDelay = 1.1,
+	TEARRANGE = 0.9,
     TEARFALLINGSPEED = 0,
     LUCK = 0,
     FLYING = false,                                  
@@ -18,7 +20,7 @@ local otto = {
     SPEED = 0.3,
     SHOTSPEED = 0,
     TEARHEIGHT = 0,
-	MaxFireDelay = 1.45,
+	MaxFireDelay = 1.3,
 	TEARRANGE = 0.8,
     TEARFALLINGSPEED = 0,
     LUCK = 0, 
@@ -30,7 +32,7 @@ local otto = {
 local xiaobai = { 
     DAMAGE = 0.7, 
     SPEED = -0.6,
-    SHOTSPEED = 0,
+    SHOTSPEED = -0.3,
     TEARHEIGHT = 0,
 	MaxFireDelay = 2.5,
 	TEARRANGE = 0.75,
@@ -42,11 +44,11 @@ local xiaobai = {
 }
 
 local sand = { 
-    DAMAGE = -1.5, 
+    DAMAGE = -1, 
     SPEED = 0,
     SHOTSPEED = 0,
     TEARHEIGHT = 0,
-	MaxFireDelay = 1.45,
+	MaxFireDelay = 1.35,
 	TEARRANGE = 1.4,
     TEARFALLINGSPEED = 0,
     LUCK = 0, 
@@ -86,16 +88,132 @@ local todd = {
 local peach = { 
     DAMAGE = 1, 
     SPEED = -0.25,
-    SHOTSPEED = 0,
-    TEARHEIGHT = 0,
+    SHOTSPEED = 0.7,
+    TEARHEIGHT = -0.15,
 	MaxFireDelay = 1.35, --1 is defaut
-	TEARRANGE = 0.55,  --1 is defaut
+	TEARRANGE = 0.7,  --1 is defaut
     TEARFALLINGSPEED = 0,
     LUCK = 0, 
     FLYING = false,                                  
     TEARFLAG = 0, -- 0 is default
     TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
 }
+
+local cardList = {}local shand = { -- Change everywhere to match your character. No spaces!
+    DAMAGE = -1, -- These are all relative to Isaac's base stats.
+    SPEED = 0,
+    SHOTSPEED = -0.15,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1.1,
+	TEARRANGE = 0.9,
+    TEARFALLINGSPEED = 0,
+    LUCK = 0,
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0)  -- Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) is default
+}
+
+local otto = { 
+    DAMAGE = -0.5, 
+    SPEED = 0.3,
+    SHOTSPEED = 0,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1.3,
+	TEARRANGE = 0.8,
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+local xiaobai = { 
+    DAMAGE = 0.7, 
+    SPEED = -0.6,
+    SHOTSPEED = -0.3,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 2.5,
+	TEARRANGE = 0.75,
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+local sand = { 
+    DAMAGE = -1, 
+    SPEED = 0,
+    SHOTSPEED = 0,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1.35,
+	TEARRANGE = 1.4,
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(255, 255, 255, 255, 76, 0, 0) 
+}
+
+local back = { 
+    DAMAGE = -2, 
+    SPEED = 0,
+    SHOTSPEED = 0,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1, --1 is defaut
+	TEARRANGE = 0.8,  --1 is defaut
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+local todd = { 
+    DAMAGE = -3.2, 
+    SPEED = 0,
+    SHOTSPEED = 0,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1, --1 is defaut
+	TEARRANGE = 1,  --1 is defaut
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+local peach = { 
+    DAMAGE = 1, 
+    SPEED = -0.25,
+    SHOTSPEED = 0.7,
+    TEARHEIGHT = -0.15,
+	MaxFireDelay = 1.35, --1 is defaut
+	TEARRANGE = 0.7,  --1 is defaut
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+local cardList = {}
+
+local win8 = { 
+    DAMAGE = 0, 
+    SPEED = 0.1,
+    SHOTSPEED = 0,
+    TEARHEIGHT = 0,
+	MaxFireDelay = 1.1, --1 is defaut
+	TEARRANGE = 1,  --1 is defaut
+    TEARFALLINGSPEED = 0,
+    LUCK = 0, 
+    FLYING = false,                                  
+    TEARFLAG = 0, -- 0 is default
+    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
+}
+
+
 	----ShanD Stats----
 function shand:onCache(player, cacheFlag) -- I do mean everywhere!
     if player:GetName() == "ShanD" then -- Especially here!
@@ -342,6 +460,41 @@ function peach:onCache(player, cacheFlag) -- I do mean everywhere!
     end
 end
 
+    ----Win8 Stats----
+	function todd:onCache(player, cacheFlag) -- I do mean everywhere!
+		if player:GetName() == "Win8" then -- Especially here!
+			if cacheFlag == CacheFlag.CACHE_DAMAGE then
+				player.Damage = player.Damage + win8.DAMAGE
+			end
+			if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
+				player.ShotSpeed = player.ShotSpeed + win8.SHOTSPEED
+			end
+			if cacheFlag == CacheFlag.CACHE_RANGE then
+				player.TearHeight = player.TearHeight - win8.TEARHEIGHT
+				player.TearFallingSpeed = player.TearFallingSpeed + win8.TEARFALLINGSPEED
+				player.TearRange = player.TearRange * win8.TEARRANGE
+			end
+			if (cacheFlag == CacheFlag.CACHE_FIREDELAY) then
+				player.MaxFireDelay = player.MaxFireDelay * win8.MaxFireDelay
+			end
+			if cacheFlag == CacheFlag.CACHE_SPEED then
+				player.MoveSpeed = player.MoveSpeed + win8.SPEED
+			end
+			if cacheFlag == CacheFlag.CACHE_LUCK then
+				player.Luck = player.Luck + win8.LUCK
+			end
+			if cacheFlag == CacheFlag.CACHE_FLYING and win8.FLYING then
+				player.CanFly = true
+			end
+			if cacheFlag == CacheFlag.CACHE_TEARFLAG then
+				player.TearFlags = player.TearFlags | win8.TEARFLAG
+			end
+			if cacheFlag == CacheFlag.CACHE_TEARCOLOR then
+				player.TearColor = win8.TEARCOLOR
+			end
+		end
+	end
+
 	--- Replaces coins as fly bombs for Back ---
 local dropBombState = 0
 local currentFrame = 0
@@ -468,7 +621,7 @@ function peachHeal()
 		local rng = RNG()
 		rng:SetSeed(math.random(4294967295), RECOMMENDED_SHIFT_IDX)
 		randomChance = rng:RandomFloat() + (player.Luck * 0.02)
-		if randomChance < 0.3 and randomChance > 0 
+		if randomChance < 0.25 and randomChance > 0 
 			and player:HasFullHeartsAndSoulHearts() == false then
 			player:AddHearts(1)
 			SFXManager():Play(Isaac.GetSoundIdByName("ohhh"))
@@ -479,6 +632,7 @@ function peachHeal()
 	end
 end
 
+local peachHeart = 8
 	--- Peach speed cannot surpass 0.75 ---
 function setPeachStats()
 	local player = Isaac.GetPlayer(0)
@@ -486,10 +640,33 @@ function setPeachStats()
 		if player.MoveSpeed > 0.65 then
 			player.MoveSpeed = 0.65
 		end
+		peachHeart = player:GetMaxHearts()
+		if peachHeart ~= player:GetMaxHearts() then
+			player:AddMaxHearts(peachHeart - 2)
+		end
+	end
+end
+
+function setPeachHeart()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Peach" 
+	and sirPeachEnable == 0 then
+		player:AddMaxHearts(peachHeart - 2)
 	end
 end
 
 	--- Remove pound of flesh for peach ---
+function removeFleshPeach()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Peach" 
+	and player:HasCollectible(672) then
+		player:RemoveCollectible(672)
+		player:AnimateSad()
+		SFXManager():Play(Isaac.GetSoundIdByName("oof"))
+	end
+end
+
+--- Remove pound of flesh for peach ---
 function removeFleshPeach()
 	local player = Isaac.GetPlayer(0)
 	if player:GetName() == "Peach" 
@@ -518,10 +695,12 @@ end
 
 	--- Cache Peach`s Heart before he died ---
 local sirPeachMaxHeartCache = 8
+local peachDeath = false
 function getPeachHeart()
 	local player = Isaac.GetPlayer(0)
 	if player:GetName() == "Peach" then
 		sirPeachMaxHeartCache = player:GetMaxHearts()
+		peachDeath = true
 	end
 end
 Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, getPeachHeart, EntityType.ENTITY_PLAYER)
@@ -540,8 +719,10 @@ function setSirPeach()
 	sirPeachEnable = 0
 	local player = Isaac.GetPlayer(0)
 	if player:GetName() == "Peach" 
-	and player:GetMaxHearts() ~= 8 then
+	and player:GetMaxHearts() ~= 8
+	and peachDeath == true then
 		player:AddMaxHearts(sirPeachMaxHeartCache - 2)
+		peachDeath = false
 	end
 end
 Mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, setSirPeach)
@@ -553,8 +734,8 @@ function dmgGainSandCandle()
 	if player:GetName() == "Sand" 
 	and player:HasCollectible(CollectibleType.COLLECTIBLE_RED_CANDLE)
 	and room:IsClear() == false then
-		player.Damage = player.Damage + 0.5
-		sandDMG = sandDMG + 0.5
+		player.Damage = player.Damage + 0.2
+		sandDMG = sandDMG + 0.2
 	end
 end
 
@@ -619,6 +800,7 @@ function randomCoinTodd()
 	toddBombs = player:GetNumBombs()
 end
 
+	--- replaces all bombs to batteries for win8, then replaces all non-normal tarot cards to normal tarot cards ---
 function winBatteryDrop()
 	local player = Isaac.GetPlayer(0)
 	local itemPool = game:GetItemPool()
@@ -650,14 +832,90 @@ function winBatteryDrop()
 				entity:Remove()
 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, itemPool:GetCollectible(ItemPoolType.POOL_TREASURE), entityPosition, Vector(0,0), nil)
 			end
+			if entity.Type == EntityType.ENTITY_PICKUP
+				and entity.Variant == PickupVariant.PICKUP_TAROTCARD
+				and entity.SubType > 22 
+				and entity.SpawnerType == 0 then
+				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, math.ceil(math.random(1, 22)), entityPosition, Vector(0,0), nil)
+				entity:Remove() 
+			end
 		end
 		if player:GetNumBombs() > 0 then
 			player:AddBombs(-99)
 		end 
 	end
 end
-
 Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, winBatteryDrop)
+
+
+	--- Win8 merges two cards in the slot together when pressed bomb button, if mergable ---
+local cardMatrix = {}
+function winCardForge()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" 
+	and player:GetCard(0) * player:GetCard(1) ~= 0 
+	and player:GetCard(0) < 23 
+	and player:GetCard(1) < 23 
+	and Input.IsActionPressed(ButtonAction.ACTION_BOMB, 0) then
+		local row = player:GetCard(0)
+		local col = player:GetCard(1)
+		if cardMatrix[player:GetCard(0)][player:GetCard(1)] ~= 0 then
+			player:SetCard(1, 0)
+			player:SetCard(0, cardMatrix[row][col])
+			player:AnimateCard(player:GetCard(0))
+		elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
+			player:SetCard(1, 0)
+			player:SetCard(0, cardMatrix[col][row])
+			player:AnimateCard(player:GetCard(0))
+		end
+	end
+end
+-- Mod:AddCallback(ModCallbacks.MC_PRE_USE_ITEM, winCardForge, CollectibleType.COLLECTIBLE_DECK_OF_CARDS)
+Mod:AddCallback(ModCallbacks.MC_INPUT_ACTION, winCardForge, 0, InputHook.IS_ACTION_Pressed, ButtonAction.ACTION_BOMB)
+
+	--- Win8 only gets a normal tarot card when using card deck ---
+function winUseCardDeck()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" then
+		player:SetCard(0, math.ceil(math.random(1, 22)))
+	end
+end
+Mod:AddCallback(ModCallbacks.MC_USE_ITEM, winUseCardDeck, CollectibleType.COLLECTIBLE_DECK_OF_CARDS)
+
+	--- Win8's initial charge for card deck will always be 3 ---
+function winChargeCardDeck()
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" 
+	and player:HasCollectible(85) then
+		for i = 0, 1 do
+			if player:GetActiveItem(i) == CollectibleType.COLLECTIBLE_DECK_OF_CARDS 
+			and player:GetActiveCharge(i) == 0 then
+				player:SetActiveCharge(3)
+			end
+		end
+	end
+end
+Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, winChargeCardDeck)
+
+	--- Renders text on screen to show what cards can be merged into for Win8, if possible ---
+function winShowCard()	
+	local f = Font()
+	f:Load("font/teammeatfont10.fnt") 
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" 
+	and player:GetCard(0) * player:GetCard(1) ~= 0 
+	and player:GetCard(0) < 23 
+	and player:GetCard(1) < 23 then
+		local row = player:GetCard(0)
+		local col = player:GetCard(1)
+		if cardMatrix[player:GetCard(0)][player:GetCard(1)] ~= 0 then
+			f:DrawString(cardList[cardMatrix[row][col]], 60,50,KColor(1,1,1,1,0,0,0),0,true)
+		elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
+			f:DrawString(cardList[cardMatrix[col][row]], 60,50,KColor(1,1,1,1,0,0,0),0,true)
+		end
+	end	
+end
+Mod:AddCallback(ModCallbacks.MC_POST_RENDER, winShowCard)
 
 	--- Pauses music when hourglass is used and plays barking sfx ---
 local musicState = true
@@ -705,8 +963,8 @@ end
 function replaceSoundStop(ID, newSound)
 	if SFXManager():IsPlaying(ID) then
 		SFXManager():Stop(ID)
-		SFXManager():Play(Isaac.GetSoundIdByName(newSound))
 	end
+	SFXManager():Play(Isaac.GetSoundIdByName(newSound))
 end
 
 	--- Mutes a sound ----
@@ -806,7 +1064,7 @@ Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, trDarkOneSound, EntityType.ENTI
 
 	--- Adds tr slimes death sounds ---
 function slimeDeathSound()
-	SFXManager():Play(Isaac.GetSoundIdByName("slime_gel"))
+	replaceSoundStop(207, "slime_gel")
 end
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, slimeDeathSound, EntityType.ENTITY_BLASTOCYST_BIG)
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, slimeDeathSound, EntityType.ENTITY_BLASTOCYST_MEDIUM)
@@ -1012,6 +1270,184 @@ function(_,mpgsc)
 		end 
 	end
 end)
+
+--- Removes peach's starting item ---
+Mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED,
+function(_,mpgsc) 
+	local player = Isaac.GetPlayer(0)
+	local roomEntities = Isaac.GetRoomEntities()
+	if player:GetName() == "Win8" then
+		if(not mpgsc) then 
+			player:SetCard(0, 0)
+			for i, entity in pairs(roomEntities) do
+				if entity.Type == EntityType.ENTITY_PICKUP
+					and entity.Variant == PickupVariant.PICKUP_TAROTCARD then
+					entity:Remove()
+				end
+			end
+		end 
+	end
+end)
+
+Mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED,
+function(_,mpgsc) 
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" then
+		if(not mpgsc) then 
+			for i = 1, 22 do --- Initialise matrix
+				cardMatrix[i] = {}     -- create a new row
+				 for j = 1, 22 do
+					cardMatrix[i][j] = 0
+				 end
+			 end
+			 for i = 1, 22 do
+				cardMatrix[i][i] = 55 + i
+			 end
+			 cardMatrix[17][17] = 42
+			 cardMatrix[1][6] = 35
+			 cardMatrix[1][14] = 91
+			 cardMatrix[1][17] = 72
+			 cardMatrix[1][22] = 53
+			 cardMatrix[2][3] = 50
+			 cardMatrix[2][10] = 93
+			 cardMatrix[2][13] = 80
+			 cardMatrix[2][17] = 23
+			 cardMatrix[3][10] = 38
+			 cardMatrix[3][14] = 41
+			 cardMatrix[4][7] = 30
+			 cardMatrix[5][16] = 88
+			 cardMatrix[5][19] = 78
+			 cardMatrix[5][20] = 51
+			 cardMatrix[6][3] = 96
+			 cardMatrix[7][6] = 26
+			 cardMatrix[8][12] = 52
+			 cardMatrix[8][14] = 39
+			 cardMatrix[8][17] = 32
+			 cardMatrix[9][2] = 55
+			 cardMatrix[9][10] = 28
+			 cardMatrix[9][18] = 49
+			 cardMatrix[10][18] = 25
+			 cardMatrix[11][2] = 40
+			 cardMatrix[11][10] = 24
+			 cardMatrix[11][14] = 89
+			 cardMatrix[11][17] = 27
+			 cardMatrix[12][3] = 86
+			 cardMatrix[12][7] = 82
+			 cardMatrix[12][17] = 84
+			 cardMatrix[12][21] = 87
+			 cardMatrix[13][3] = 92
+			 cardMatrix[13][5] = 97
+			 cardMatrix[13][19] = 47
+			 cardMatrix[13][22] = 36
+			 cardMatrix[13][23] = 54
+			 cardMatrix[14][13] = 95
+			 cardMatrix[15][2] = 44
+			 cardMatrix[15][4] = 85
+			 cardMatrix[16][14] = 46
+			 cardMatrix[18][3] = 94
+			 cardMatrix[18][16] = 31
+			 cardMatrix[19][15] = 34
+			 cardMatrix[20][7] = 79
+			 cardMatrix[20][10] = 43
+			 cardMatrix[20][18] = 29
+			 cardMatrix[21][11] = 48
+			 cardMatrix[21][18] = 37
+			 cardMatrix[21][19] = 83
+			 cardMatrix[22][9] = 33
+			 cardMatrix[22][11] = 90
+			 cardMatrix[22][17] = 45
+			 cardMatrix[22][18] = 81
+		end 
+	end
+end)
+
+Mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED,
+function(_,mpgsc) 
+	local player = Isaac.GetPlayer(0)
+	if player:GetName() == "Win8" then
+		if(not mpgsc) then 
+			for i=23, 98 do
+				cardList[i] = ""
+			end
+			cardList[23] = "2 of Clubs"
+			cardList[24] = "2 of Diamonds"
+			cardList[25] = "2 of Spades"
+			cardList[26] = "2 of Hearts"
+			cardList[27] = "Ace of Clubs"
+			cardList[28] = "Ace of Diamonds"
+			cardList[29] = "Ace of Spades"
+			cardList[30] = "Ace of Hearts"
+			cardList[31] = "Joker"
+			cardList[32] = "Hagalaz"
+			cardList[33] = "Jera"
+			cardList[34] = "Ehwaz"
+			cardList[35] = "Dagaz"
+			cardList[36] = "Ansuz"
+			cardList[37] = "Perthro"
+			cardList[38] = "Berkano"
+			cardList[39] = "Algiz"
+			cardList[40] = "Blank Rune"
+			cardList[41] = "Black Rune"
+			cardList[42] = "Chaos Card"
+			cardList[43] = "Credit Card"
+			cardList[44] = "Rules Card"
+			cardList[45] = "A Card Against Humanity"
+			cardList[46] = "Suicide King"
+			cardList[47] = "Get Out of Jail Free Card"
+			cardList[48] = "? Card"
+			cardList[49] = "Dice Shard"
+			cardList[50] = "Emergency Contact"
+			cardList[51] = "Holy Card"
+			cardList[52] = "Huge Growth"
+			cardList[53] = "Ancient Recall"
+			cardList[54] = "Sonic"
+			cardList[55] = "Rune Shard"
+			cardList[56] = "The Fool?"
+			cardList[57] = "The Magician?"
+			cardList[58] = "Dave's Pan?"
+			cardList[59] = "The Empress?"
+			cardList[60] = "The Hierophant?"
+			cardList[61] = "The Lovers?"
+			cardList[62] = "The Chariot?"
+			cardList[63] = "The Justice?"
+			cardList[64] = "The Hermit?"
+			cardList[65] = "Wheel of Fortune?"
+			cardList[66] = "Justice?"
+			cardList[67] = "Strength?"
+			cardList[68] = "The Hanged Man?"
+			cardList[69] = "Death?"
+			cardList[70] = "Temperance?"
+			cardList[71] = "The Devil?"
+			cardList[72] = "The Tower?"
+			cardList[73] = "The Stars?"
+			cardList[74] = "The Moon?"
+			cardList[75] = "The Sun?"
+			cardList[76] = "Judgement?"
+			cardList[77] = "The World?"
+			cardList[78] = "Cracked Key"
+			cardList[79] = "Queen of Hearts"
+			cardList[80] = "Wild Card"
+			cardList[81] = "Soul of Isaac"
+			cardList[82] = "Soul of Magdalene"
+			cardList[83] = "Soul of Cain"
+			cardList[84] = "Soul of Judas"
+			cardList[85] = "Soul of ???"
+			cardList[86] = "Soul of Eve"
+			cardList[87] = "Soul of Samson"
+			cardList[88] = "Soul of Azazel"
+			cardList[89] = "Soul of Lazarus"
+			cardList[90] = "Soul of Eden"
+			cardList[91] = "Soul of the Lost"
+			cardList[92] = "Soul of Lilith"
+			cardList[93] = "Soul of the Keeper"
+			cardList[94] = "Soul of Apollyon"
+			cardList[95] = "Soul of Forgotten"
+			cardList[96] = "Soul of Bethany"
+			cardList[97] = "Soul of Jacob and Esau"
+		end
+	end
+end)
+
 
 --- Player starting stats ----
 Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, shand.onCache)
