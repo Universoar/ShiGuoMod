@@ -909,9 +909,9 @@ function winShowCard()
 		local row = player:GetCard(0)
 		local col = player:GetCard(1)
 		if cardMatrix[player:GetCard(0)][player:GetCard(1)] ~= 0 then
-			f:DrawString(cardList[cardMatrix[row][col]], 60,50,KColor(1,1,1,1,0,0,0),0,true)
+			f:DrawString(cardList[cardMatrix[row][col]], 170,280,KColor(1,1,1,1,0,0,0),0,true)
 		elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
-			f:DrawString(cardList[cardMatrix[col][row]], 60,50,KColor(1,1,1,1,0,0,0),0,true)
+			f:DrawString(cardList[cardMatrix[col][row]], 170,280,KColor(1,1,1,1,0,0,0),0,true)
 		end
 	end	
 end
