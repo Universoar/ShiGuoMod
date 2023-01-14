@@ -863,10 +863,12 @@ function winCardForge()
 			player:SetCard(1, 0)
 			player:SetCard(0, cardMatrix[row][col])
 			player:AnimateCard(player:GetCard(0))
+			SFXManager():Play(Isaac.GetSoundIdByName("card_merge"))
 		elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
 			player:SetCard(1, 0)
 			player:SetCard(0, cardMatrix[col][row])
 			player:AnimateCard(player:GetCard(0))
+			SFXManager():Play(Isaac.GetSoundIdByName("card_merge"))
 		end
 	end
 end
