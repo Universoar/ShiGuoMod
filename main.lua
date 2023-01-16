@@ -2,7 +2,7 @@ local Mod = RegisterMod("SHIGUO 2023", 1) -- Change the part in quotes to match 
 local game = Game()
  
 local shand = { -- Change everywhere to match your character. No spaces!
-    DAMAGE = -1, -- These are all relative to Isaac's base stats.
+    DAMAGE = 0.05, -- These are all relative to Isaac's base stats.
     SPEED = 0,
     SHOTSPEED = -0.15,
     TEARHEIGHT = 0,
@@ -16,7 +16,7 @@ local shand = { -- Change everywhere to match your character. No spaces!
 }
 
 local otto = { 
-    DAMAGE = -0.5, 
+    DAMAGE = 0, 
     SPEED = 0.3,
     SHOTSPEED = 0,
     TEARHEIGHT = 0,
@@ -35,7 +35,7 @@ local xiaobai = {
     SHOTSPEED = -0.3,
     TEARHEIGHT = 0,
 	MaxFireDelay = 2.5,
-	TEARRANGE = 0.75,
+	TEARRANGE = 0,   -- 40 is +1 tearrange
     TEARFALLINGSPEED = 0,
     LUCK = 0, 
     FLYING = false,                                  
@@ -44,12 +44,12 @@ local xiaobai = {
 }
 
 local sand = { 
-    DAMAGE = -1, 
+    DAMAGE = 0.05, 
     SPEED = 0,
     SHOTSPEED = 0,
     TEARHEIGHT = 0,
 	MaxFireDelay = 1.35,
-	TEARRANGE = 1.4,
+	TEARRANGE = 100,  -- 40 is +1 tearrange
     TEARFALLINGSPEED = 0,
     LUCK = 0, 
     FLYING = false,                                  
@@ -58,105 +58,7 @@ local sand = {
 }
 
 local back = { 
-    DAMAGE = -2, 
-    SPEED = 0,
-    SHOTSPEED = 0,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 1, --1 is defaut
-	TEARRANGE = 0.8,  --1 is defaut
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
-}
-
-local todd = { 
-    DAMAGE = -3.2, 
-    SPEED = 0,
-    SHOTSPEED = 0,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 1, --1 is defaut
-	TEARRANGE = 1,  --1 is defaut
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
-}
-
-local peach = { 
-    DAMAGE = 1, 
-    SPEED = -0.25,
-    SHOTSPEED = 0.7,
-    TEARHEIGHT = -0.15,
-	MaxFireDelay = 1.35, --1 is defaut
-	TEARRANGE = 0.7,  --1 is defaut
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
-}
-
-local cardList = {}local shand = { -- Change everywhere to match your character. No spaces!
-    DAMAGE = -1, -- These are all relative to Isaac's base stats.
-    SPEED = 0,
-    SHOTSPEED = -0.15,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 1.1,
-	TEARRANGE = 0.9,
-    TEARFALLINGSPEED = 0,
-    LUCK = 0,
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0)  -- Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) is default
-}
-
-local otto = { 
-    DAMAGE = -0.5, 
-    SPEED = 0.3,
-    SHOTSPEED = 0,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 1.3,
-	TEARRANGE = 0.8,
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
-}
-
-local xiaobai = { 
-    DAMAGE = 0.7, 
-    SPEED = -0.6,
-    SHOTSPEED = -0.3,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 2.5,
-	TEARRANGE = 0.75,
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(1.0, 1.0, 1.0, 1.0, 0, 0, 0) 
-}
-
-local sand = { 
-    DAMAGE = -1, 
-    SPEED = 0,
-    SHOTSPEED = 0,
-    TEARHEIGHT = 0,
-	MaxFireDelay = 1.35,
-	TEARRANGE = 1.4,
-    TEARFALLINGSPEED = 0,
-    LUCK = 0, 
-    FLYING = false,                                  
-    TEARFLAG = 0, -- 0 is default
-    TEARCOLOR = Color(255, 255, 255, 255, 76, 0, 0) 
-}
-
-local back = { 
-    DAMAGE = -2, 
+    DAMAGE = -3.5, 
     SPEED = 0,
     SHOTSPEED = 0,
     TEARHEIGHT = 0,
@@ -218,7 +120,7 @@ local win8 = {
 function shand:onCache(player, cacheFlag) -- I do mean everywhere!
     if player:GetName() == "ShanD" then -- Especially here!
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + shand.DAMAGE
+            player.Damage = player.Damage*0.7 + shand.DAMAGE
         end
         if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
             player.ShotSpeed = player.ShotSpeed + shand.SHOTSPEED
@@ -226,6 +128,10 @@ function shand:onCache(player, cacheFlag) -- I do mean everywhere!
         if cacheFlag == CacheFlag.CACHE_RANGE then
             player.TearHeight = player.TearHeight - shand.TEARHEIGHT
             player.TearFallingSpeed = player.TearFallingSpeed + shand.TEARFALLINGSPEED
+			player.TearRange = player.TearRange * shand.TEARRANGE
+        end
+		if (cacheFlag == CacheFlag.CACHE_FIREDELAY) then
+			player.MaxFireDelay = player.MaxFireDelay + shand.MaxFireDelay
         end
         if cacheFlag == CacheFlag.CACHE_SPEED then
             player.MoveSpeed = player.MoveSpeed + shand.SPEED
@@ -249,7 +155,7 @@ end
 function otto:onCache(player, cacheFlag) -- I do mean everywhere!
     if player:GetName() == "otto" then -- Especially here!
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + otto.DAMAGE
+            player.Damage = player.Damage*0.85 + otto.DAMAGE
         end
         if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
             player.ShotSpeed = player.ShotSpeed + otto.SHOTSPEED
@@ -260,7 +166,7 @@ function otto:onCache(player, cacheFlag) -- I do mean everywhere!
 			player.TearRange = player.TearRange * otto.TEARRANGE
 		end
 		if (cacheFlag == CacheFlag.CACHE_FIREDELAY) then
-			player.MaxFireDelay = player.MaxFireDelay + otto.MaxFireDelay * 3
+			player.MaxFireDelay = player.MaxFireDelay + otto.MaxFireDelay
         end
         if cacheFlag == CacheFlag.CACHE_SPEED then
             player.MoveSpeed = player.MoveSpeed + otto.SPEED * 0.8
@@ -292,7 +198,7 @@ function xiaobai:onCache(player, cacheFlag) -- I do mean everywhere!
         if cacheFlag == CacheFlag.CACHE_RANGE then
             player.TearHeight = player.TearHeight - xiaobai.TEARHEIGHT
             player.TearFallingSpeed = player.TearFallingSpeed + xiaobai.TEARFALLINGSPEED
-			player.TearRange = player.TearRange * xiaobai.TEARRANGE
+			player.TearRange = player.TearRange*0.75 + xiaobai.TEARRANGE
 		end
 		if (cacheFlag == CacheFlag.CACHE_FIREDELAY) then
 			player.MaxFireDelay = player.MaxFireDelay * xiaobai.MaxFireDelay
@@ -321,7 +227,7 @@ local sandSpeed = 0
 function sand:onCache(player, cacheFlag) -- I do mean everywhere!
     if player:GetName() == "Sand" then -- Especially here!
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + sand.DAMAGE + sandDMG
+            player.Damage = player.Damage*0.7 + sand.DAMAGE + sandDMG
         end
         if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
             player.ShotSpeed = player.ShotSpeed + sand.SHOTSPEED
@@ -329,7 +235,7 @@ function sand:onCache(player, cacheFlag) -- I do mean everywhere!
         if cacheFlag == CacheFlag.CACHE_RANGE then
             player.TearHeight = player.TearHeight - sand.TEARHEIGHT
             player.TearFallingSpeed = player.TearFallingSpeed + sand.TEARFALLINGSPEED
-			player.TearRange = player.TearRange * sand.TEARRANGE
+			player.TearRange = player.TearRange + sand.TEARRANGE
 		end
 		if (cacheFlag == CacheFlag.CACHE_FIREDELAY) then
 			player.MaxFireDelay = player.MaxFireDelay * sand.MaxFireDelay
@@ -356,7 +262,7 @@ end
 function back:onCache(player, cacheFlag) -- I do mean everywhere!
     if player:GetName() == "Back" then -- Especially here!
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + back.DAMAGE
+            player.Damage = player.Damage*1.1 + back.DAMAGE
         end
         if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
             player.ShotSpeed = player.ShotSpeed + back.SHOTSPEED
@@ -494,6 +400,14 @@ end
 			end
 		end
 	end
+
+function randomChanceGenerate()
+	local RECOMMENDED_SHIFT_IDX = 35
+	local rng = RNG()
+	rng:SetSeed(math.random(4294967295), RECOMMENDED_SHIFT_IDX)
+	randomChance = rng:RandomFloat()
+	return randomChance
+end
 
 	--- Replaces coins as fly bombs for Back ---
 local dropBombState = 0
@@ -770,13 +684,13 @@ function randomCoinTodd()
 	local rng = RNG()
 	rng:SetSeed(math.random(4294967295), RECOMMENDED_SHIFT_IDX)
 	randomChance = rng:RandomFloat() + (player.Luck * 0.02)
-	randomAmount = rng:RandomInt(4)
+	randomAmount = rng:RandomInt(3)
 	
 	if player:GetName() == "Todd" then 
 		if randomChance < 0.4 and randomChance > 0 then
 			if player:GetNumCoins() - toddCoin == 1
 			or player:GetNumCoins() - toddCoin == 2 then
-				player:AddCoins(-2 - randomAmount)
+				player:AddCoins(-randomAmount)
 			end
 			if player:GetNumCoins() - toddCoin == 5 then
 				player:AddCoins(-3)
@@ -919,6 +833,35 @@ function winShowCard()
 end
 Mod:AddCallback(ModCallbacks.MC_POST_RENDER, winShowCard)
 
+-- function winDropCardDevil()
+-- 	local player = Isaac.GetPlayer(0)
+-- 	local roomEntities = Isaac.GetRoomEntities()
+-- 	if player:GetName() == "Win8" then
+-- 		for i, entity in pairs(roomEntities) do
+-- 			if entity:IsBoss() == true then
+-- 				local entityPosition = entity.Position
+-- 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEVIL, entityPosition, Vector(0,0), nil)
+-- 			end
+-- 		end
+-- 	end
+-- end
+-- Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, winDropCardDevil)
+
+-- function winDropCardDeath(chest, player)
+-- 	player = Isaac.GetPlayer(0)
+-- 	local roomEntities = Isaac.GetRoomEntities()
+-- 	local chance = randomChanceGenerate()
+-- 	if player:GetName() == "Win8" then
+-- 		for i, entity in pairs(roomEntities) do
+-- 			if entity.SubType == ChestSubType.CHEST_OPENED then
+-- 				print(entity.SubType)
+-- 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEATH, player.Position, Vector(0,0), nil)
+-- 			end
+-- 		end
+-- 	end
+-- end
+-- Mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, winDropCardDeath, PickupVariant.PICKUP_REDCHEST)
+
 	--- Pauses music when hourglass is used and plays barking sfx ---
 local musicState = true
 function noBarking()
@@ -965,8 +908,8 @@ end
 function replaceSoundStop(ID, newSound)
 	if SFXManager():IsPlaying(ID) then
 		SFXManager():Stop(ID)
+		SFXManager():Play(Isaac.GetSoundIdByName(newSound))
 	end
-	SFXManager():Play(Isaac.GetSoundIdByName(newSound))
 end
 
 	--- Mutes a sound ----
@@ -1459,3 +1402,4 @@ Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, sand.onCache)
 Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, back.onCache)
 Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, todd.onCache)
 Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, peach.onCache)
+Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, win8.onCache)
