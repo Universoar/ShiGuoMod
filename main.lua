@@ -367,7 +367,7 @@ function peach:onCache(player, cacheFlag) -- I do mean everywhere!
 end
 
     ----Win8 Stats----
-	function todd:onCache(player, cacheFlag) -- I do mean everywhere!
+	function win8:onCache(player, cacheFlag) -- I do mean everywhere!
 		if player:GetName() == "Win8" then -- Especially here!
 			if cacheFlag == CacheFlag.CACHE_DAMAGE then
 				player.Damage = player.Damage + win8.DAMAGE
