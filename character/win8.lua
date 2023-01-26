@@ -393,4 +393,17 @@ function win8_module.newRoom()
     end
 end
 
+--- 80% chance to get Fool card at the beginning of each level
+function win8_module.winDropCardFool()
+    local player = Isaac.GetPlayer(0)
+    if player:GetName() == "Win8" then
+        randomNumber = Random()
+        if randomNumber / (4294967296) <= 0.8 then
+            Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_FOOL,
+                player.Position,
+                Vector(0, 0), nil)
+        end
+    end
+end
+
 return win8_module
