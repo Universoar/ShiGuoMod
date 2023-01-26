@@ -35,7 +35,7 @@ Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, win8_module.winChargeCardDeck)
 
 Mod:AddCallback(ModCallbacks.MC_POST_RENDER, win8_module.winShowCard)
 
--- Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, winDropCardDevil)
+Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, win8_module.winDropCardDevil)
 
 -- Mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, winDropCardDeath, PickupVariant.PICKUP_REDCHEST)
 

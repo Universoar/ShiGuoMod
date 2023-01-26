@@ -343,18 +343,24 @@ function win8_module.unNameFunction3(_, mpgsc)
     end
 end
 
--- function winDropCardDevil()
--- 	local player = Isaac.GetPlayer(0)
--- 	local roomEntities = Isaac.GetRoomEntities()
--- 	if player:GetName() == "Win8" then
--- 		for i, entity in pairs(roomEntities) do
--- 			if entity:IsBoss() == true then
--- 				local entityPosition = entity.Position
--- 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEVIL, entityPosition, Vector(0,0), nil)
--- 			end
--- 		end
--- 	end
--- end
+function win8_module.winDropCardDevil()
+    local player = Isaac.GetPlayer(0)
+    local roomEntities = Isaac.GetRoomEntities()
+    if player:GetName() == "Win8" then
+        for i, entity in pairs(roomEntities) do
+            if entity:IsBoss() == true and entity:IsDead() == true then
+                randomNumber = Random()
+                if randomNumber / (4294967296) <= 0.8 then
+                    local entityPosition = entity.Position
+                    Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEVIL, entityPosition
+                        ,
+                        Vector(0, 0), nil)
+                    break
+                end
+            end
+        end
+    end
+end
 
 -- function winDropCardDeath(chest, player)
 -- 	player = Isaac.GetPlayer(0)
