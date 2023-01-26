@@ -343,6 +343,7 @@ function win8_module.unNameFunction3(_, mpgsc)
     end
 end
 
+--- Defeat BOSS 80% chance to drop devil card
 function win8_module.winDropCardDevil()
     local player = Isaac.GetPlayer(0)
     local roomEntities = Isaac.GetRoomEntities()
@@ -362,18 +363,34 @@ function win8_module.winDropCardDevil()
     end
 end
 
--- function winDropCardDeath(chest, player)
--- 	player = Isaac.GetPlayer(0)
--- 	local roomEntities = Isaac.GetRoomEntities()
--- 	local chance = randomChanceGenerate()
--- 	if player:GetName() == "Win8" then
--- 		for i, entity in pairs(roomEntities) do
--- 			if entity.SubType == ChestSubType.CHEST_OPENED then
--- 				print(entity.SubType)
--- 				Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEATH, player.Position, Vector(0,0), nil)
--- 			end
--- 		end
--- 	end
--- end
+--- Open the red chest with a 60% chance of dropping a death card
+win8_module.isNewRoom = true
+function win8_module.winDropCardDeath(chest, player, low)
+    local player = Isaac.GetPlayer(0)
+    local roomEntities = Isaac.GetRoomEntities()
+    if player:GetName() == "Win8" and win8_module.isNewRoom == true then
+        for i, entity in pairs(roomEntities) do
+            if entity.Type == EntityType.ENTITY_PICKUP and entity.Variant == 360 and
+                entity.SubType == ChestSubType.CHEST_OPENED then
+                randomNumber = Random()
+                if randomNumber / (4294967296) <= 0.6 then
+                    Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEATH,
+                        player.Position,
+                        Vector(0, 0), nil)
+                    win8_module.isNewRoom = false
+                    break
+                end
+            end
+        end
+    end
+end
+
+--- reset isNewRoom
+function win8_module.newRoom()
+    local player = Isaac.GetPlayer(0)
+    if player:GetName() == "Win8" then
+        win8_module.isNewRoom = true
+    end
+end
 
 return win8_module

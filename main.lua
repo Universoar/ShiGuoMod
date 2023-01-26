@@ -37,7 +37,9 @@ Mod:AddCallback(ModCallbacks.MC_POST_RENDER, win8_module.winShowCard)
 
 Mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, win8_module.winDropCardDevil)
 
--- Mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, winDropCardDeath, PickupVariant.PICKUP_REDCHEST)
+Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, win8_module.newRoom)
+
+Mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, win8_module.winDropCardDeath, PickupVariant.PICKUP_REDCHEST)
 
 Mod:AddCallback(ModCallbacks.MC_POST_GAME_END, sound_base_module.resetGlobalValues)
 
