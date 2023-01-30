@@ -216,6 +216,20 @@ function sound_base_module.vagrantSound()
     end
 end
 
+function sound_base_module.xianbeiSound()
+	local roomEntities = Isaac.GetRoomEntities()
+	for i, entity in pairs(roomEntities) do 
+		if entity.Type == EntityType.ENTITY_CHUB
+			and entity.Variant == 1 then --- CHAD is a variant of Chub
+            sound_base_module.replaceSoundStop(115, "xianbei_AAA")
+			sound_base_module.replaceSoundStop(116, "xianbei_roar")
+			sound_base_module.replaceSoundStop(117, "xianbei_death")
+			sound_base_module.replaceSoundStop(265, "xianbei_chew")
+		end
+	end
+end
+
+
 ------------ Miniboss Sfx ------------
 function sound_base_module.playMinibossSound(soundName, soundNameUltra, miniboss)
     local roomEntities = Isaac.GetRoomEntities()

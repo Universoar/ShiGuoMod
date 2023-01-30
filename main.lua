@@ -75,7 +75,10 @@ Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.skeletronSoun
 
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.vagrantSound, EntityType.ENTITY_RAINMAKER)
 
+Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.xianbeiSound, EntityType.ENTITY_CHUB)
 
+
+	---- Miniboss SFX ----
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, sound_base_module.aaSound, EntityType.ENTITY_SLOTH)
 
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, sound_base_module.markSound, EntityType.ENTITY_GLUTTONY)
