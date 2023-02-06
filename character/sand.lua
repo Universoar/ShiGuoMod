@@ -52,20 +52,21 @@ function sand_module.sand:onCache(player, cacheFlag) -- I do mean everywhere!
     end
 end
 
---- Sand gains 0.5 dmg everytime a room is cleared with Fire Candle ---
+--- Sand gains 0.15 dmg everytime a room is cleared with Fire Candle ---
 function sand_module.dmgGainSandCandle()
     local player = Isaac.GetPlayer(0)
     local room = Game():GetRoom()
     if player:GetName() == "Sand"
         and player:HasCollectible(CollectibleType.COLLECTIBLE_RED_CANDLE)
-        and room:IsClear() == false then
-        player.Damage = player.Damage + 0.2
-        sand_module.sandDMG = sand_module.sandDMG + 0.2
+        and room:IsClear() == false 
+        and player.Damage < 5.5 then
+        player.Damage = player.Damage + 0.15
+        sand_module.sandDMG = sand_module.sandDMG + 0.15
     end
 end
 
 --- Sand gains 0.01 speed when moms bra is used, plays ice sound ---
-function sand_module.dmgGainSandMomBra()
+function sand_module.speedGainSandMomBra()
     SFXManager():Play(Isaac.GetSoundIdByName("ice"))
     local player = Isaac.GetPlayer(0)
     if player:GetName() == "Sand" then
@@ -74,7 +75,29 @@ function sand_module.dmgGainSandMomBra()
     end
 end
 
---- Replaces Sand's random starting trinket with Blessed Penny
+--- Replace soul heart sprite to mana stars ---
+function sand_module.sandReplaceSoul()
+    local player = Isaac.GetPlayer(0)
+    local roomEntities = Isaac.GetRoomEntities()
+    if player:GetName() == "Sand" then
+        for i, entity in pairs(roomEntities) do
+            if entity.Type == EntityType.ENTITY_PICKUP 
+            and entity.Variant == PickupVariant.PICKUP_HEART then
+                local sprite = entity:GetSprite()
+                if entity.SubType == HeartSubType.HEART_SOUL
+                or entity.SubType == HeartSubType.HEART_HALF_SOUL
+                or entity.SubType == HeartSubType.HEART_BLENDED then
+                    if sprite:GetFrame(sprite:GetAnimation()) == 1 then
+                        sprite:ReplaceSpritesheet(0, "gfx/items/pick ups/sand_soulheart.png")
+                        sprite:LoadGraphics()
+                    end
+                end
+            end
+        end
+    end
+end
+
+--- Replaces Sand's random starting trinket with Blessed Penny ---
 function sand_module.unNameFunction1(_, mpgsc)
     local player = Isaac.GetPlayer(0)
     local roomEntities = Isaac.GetRoomEntities()

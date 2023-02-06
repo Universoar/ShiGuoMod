@@ -229,6 +229,27 @@ function sound_base_module.xianbeiSound()
 	end
 end
 
+function sound_base_module.xushengSound()
+    local roomEntities = Isaac.GetRoomEntities()
+	for i, entity in pairs(roomEntities) do 
+		if entity.Type == EntityType.ENTITY_BUMBINO then
+            sound_base_module.replaceSoundStop(719, "xusheng_death")
+			sound_base_module.replaceSoundStop(720, "xusheng_lebusishu")
+			sound_base_module.replaceSoundStop(721, "xusheng_jiusha")
+			sound_base_module.soundMute(722)
+            sound_base_module.replaceSoundStop(723, "xusheng_sha")
+            sound_base_module.replaceSoundStop(724, "xusheng_juedou")
+            sound_base_module.replaceSoundStop(725, "xusheng_pozhi")
+            sound_base_module.replaceSoundStop(726, "xusheng_wuxiekeji")
+            sound_base_module.soundMute(303)
+		end
+	end
+end
+
+function sound_base_module.xushengAppear()
+    SFXManager():Play(Isaac.GetSoundIdByName("xusheng_appear"))
+end
+
 
 ------------ Miniboss Sfx ------------
 function sound_base_module.playMinibossSound(soundName, soundNameUltra, miniboss)
@@ -254,7 +275,7 @@ function sound_base_module.markSound()
 end
 
 function sound_base_module.saoSound()
-    sound_base_module.SFXManager():Play(Isaac.GetSoundIdByName("sao"))
+    SFXManager():Play(Isaac.GetSoundIdByName("sao"))
 end
 
 function sound_base_module.lustSound()
