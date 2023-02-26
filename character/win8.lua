@@ -171,6 +171,9 @@ function win8_module.winChargeCardDeck()
             if player:GetActiveItem(i) == CollectibleType.COLLECTIBLE_DECK_OF_CARDS
                 and player:GetActiveCharge(i) == 0 then
                 player:SetActiveCharge(3)
+            elseif player:GetActiveItem(i) == CollectibleType.COLLECTIBLE_DECK_OF_CARDS  --- If Win8 has 9 volt, charge will be 4
+            and player:HasCollectible(116) == true then
+                player:SetActiveCharge(4)
             end
         end
     end
@@ -188,9 +191,9 @@ function win8_module.winShowCard()
         local row = player:GetCard(0)
         local col = player:GetCard(1)
         if cardMatrix[player:GetCard(0)][player:GetCard(1)] ~= 0 then
-            f:DrawString(cardList[cardMatrix[row][col]], 170, 280, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
+            f:DrawString(cardList[cardMatrix[row][col]], 185, 270, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
         elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
-            f:DrawString(cardList[cardMatrix[col][row]], 170, 280, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
+            f:DrawString(cardList[cardMatrix[col][row]], 185, 270, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
         end
     end
 end
@@ -463,23 +466,20 @@ function win8_module.winDropCardTower() --- and hanged man
 end
 
 local shopCount = 0
-local devilCount = 0
 local angelCount = 0
-function win8_module.winDropCardDevil() --- Also gives a Tower card in angel room, for blowing angel statue and moon/hermit for shop
+local win8Heart = 0
+function win8_module.winDropCardShop() --- Also gives a Tower card in angel room, for blowing angel statue and moon/hermit for shop
     local player = Isaac.GetPlayer(0)
     local room = Game():GetRoom()
     if player:GetName() == "Win8" then
-        if room:GetType() == RoomType.ROOM_DEVIL and devilCount == 0 then
-            Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEVIL,
-            player.Position,
-            Vector(0, 0), nil)
-            devilCount = 1
-        end
         if room:GetType() == RoomType.ROOM_ANGEL and angelCount == 0  then
             Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_TOWER,
             player.Position,
             Vector(0, 0), nil)
             angelCount = 1
+        end
+        if room:GetType() == RoomType.ROOM_DEVIL then
+            win8Heart = player:GetMaxHearts()
         end
         if room:GetType() == RoomType.ROOM_SHOP then
             randomNumber = Random()
@@ -495,6 +495,19 @@ function win8_module.winDropCardDevil() --- Also gives a Tower card in angel roo
             end
             shopCount = 1
         end
+    end
+end
+
+local devilCount = 0
+function win8_module.winDropCardDevil()
+    local player = Isaac.GetPlayer(0)
+    local room = Game():GetRoom()
+    if player:GetName() == "Win8" and room:GetType() == RoomType.ROOM_DEVIL 
+    and win8Heart ~= player:GetMaxHearts() and devilCount == 0 then
+        Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_DEVIL,
+        player.Position,
+        Vector(0, 0), nil)
+        devilCount = 1
     end
 end
 
