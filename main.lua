@@ -156,7 +156,13 @@ Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.xianbeiSound,
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.xushengSound, EntityType.ENTITY_BUMBINO)
 
 Mod:AddCallback(ModCallbacks.MC_POST_NPC_INIT, sound_base_module.xushengAppear, EntityType.ENTITY_BUMBINO)
-	
+
+Mod:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, sound_base_module.heishouSound, EntityType.ENTITY_BIG_HORN)
+
+Mod:AddCallback(ModCallbacks.MC_POST_NPC_INIT, sound_base_module.heishouAppear, EntityType.ENTITY_BIG_HORN)
+
+Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, sound_base_module.heishouDeath, EntityType.ENTITY_BIG_HORN)
+
 Mod:AddCallback(ModCallbacks.MC_USE_ITEM, sound_base_module.noBarking, CollectibleType.COLLECTIBLE_HOURGLASS)
 	
 Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, sound_base_module.playMusic)

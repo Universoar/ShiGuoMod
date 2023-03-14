@@ -72,36 +72,25 @@ function sound_base_module.replaceSoundSpriteID(sprite, event, ID, soundName)
 end
 
 --- Replaces all Isaac (boss) sfx to Kid's ---
--- local kidSoundCounter = 0
 function sound_base_module.kidSound()
     local roomEntities = Isaac.GetRoomEntities()
-    sound_base_module.replaceSoundRandom(143, "kid_sound") --- sound 143 is triggered randomly when Isaac is in the room
     sound_base_module.replaceSoundStop(54, "kid_charge")
     sound_base_module.replaceSoundStop(267, "kid_shoot")
     sound_base_module.replaceSoundStop(268, "kid_jump")
     SFXManager():Stop(266) --- Stop sound Superholy completely, playing sounds by events
+    SFXManager():Stop(143) --- Stop crying sound completely, playing sounds by events
     for i, entity in pairs(roomEntities) do
         if entity.Type == EntityType.ENTITY_ISAAC then
             local sprite = entity:GetSprite()
+            if sprite:IsEventTriggered("Shout") 
+                and SFXManager():IsPlaying(Isaac.GetSoundIdByName("kid_sound")) == false then
+                    SFXManager():Play(Isaac.GetSoundIdByName("kid_sound"))
+            end
             sound_base_module.replaceSoundSprite(sprite, "Evolve", "IWBTG")
             sound_base_module.replaceSoundSprite(sprite, "Death", "guy_death")
             sound_base_module.replaceSoundSprite(sprite, "Explosion", "guy_explosion")
         end
     end
-    -- if SFXManager():IsPlaying(266)
-    -- and kidSoundCounter == 0
-    -- and SFXManager():IsPlaying(Isaac.GetSoundIdByName("IWBTG")) == false then
-    -- SFXManager():Stop(266)
-    -- SFXManager():Play(Isaac.GetSoundIdByName("IWBTG"))
-    -- kidSoundCounter = 1
-    -- end
-
-    -- if SFXManager():IsPlaying(266)
-    -- and kidSoundCounter > 0
-    -- and SFXManager():IsPlaying(Isaac.GetSoundIdByName("guy_death")) == false then
-    -- SFXManager():Stop(266)
-    -- SFXManager():Play(Isaac.GetSoundIdByName("guy_death"))
-    -- end
 end
 
 --- Replaces moms heart in and out with Spamton sfx ---
@@ -250,6 +239,28 @@ function sound_base_module.xushengAppear()
     SFXManager():Play(Isaac.GetSoundIdByName("xusheng_appear"))
 end
 
+function sound_base_module.heishouSound()
+    local roomEntities = Isaac.GetRoomEntities()
+	for i, entity in pairs(roomEntities) do 
+		if entity.Type == EntityType.ENTITY_BIG_HORN then
+            local sprite = entity:GetSprite()
+            sound_base_module.replaceSoundStop(14, "heishou_roar")
+            sound_base_module.replaceSoundStop(15, "heishou_puke")
+            sound_base_module.replaceSoundSprite(sprite, "Roar", "heishou_roar")
+            sound_base_module.replaceSoundSprite(sprite, "CNM", "heishou_CNM")
+            sound_base_module.replaceSoundSprite(sprite, "Dizzy", "heishou_dizzy")
+            sound_base_module.replaceSoundSprite(sprite, "Slam", "heishou_slam")
+		end
+	end
+end
+
+function sound_base_module.heishouAppear()
+    SFXManager():Play(Isaac.GetSoundIdByName("heishou_roar"))
+end
+
+function sound_base_module.heishouDeath()
+    SFXManager():Play(Isaac.GetSoundIdByName("heishou_death"))
+end
 
 ------------ Miniboss Sfx ------------
 function sound_base_module.playMinibossSound(soundName, soundNameUltra, miniboss)
