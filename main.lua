@@ -10,6 +10,7 @@ local todd_module = require("character.todd")
 local win8_module = require("character.win8")
 local xiaobai_module = require("character.xiaobai")
 local duo_module = require("character.duo")
+local joh_module = require("character.joh")
 local sound_base_module = require("sound_controller.base")
 local helper_module = require("helper")
 
@@ -80,7 +81,6 @@ Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, xiaobai_module.removeGoldPillXiaoBa
 
 Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, xiaobai_module.removeGoldPillEffectXiaoBai)
 
-
 	------------------------ Peach ----------------------------
 Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, peach_module.dropHeartSirPeach)
 
@@ -113,6 +113,15 @@ Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, duo_module.duoSpriteChange)
 Mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED,
 	duo_module.unNameFunction1)
 
+	------------------------ John ----------------------------
+Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, joh_module.johRemoveBag)
+
+Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, joh_module.johDisableActive)
+
+Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, joh_module.johChangeActive)
+
+Mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED,
+	joh_module.unNameFunction1)
 
 	------------------------ SFX Callbacks ----------------------------
 Mod:AddCallback(ModCallbacks.MC_POST_GAME_END, sound_base_module.resetGlobalValues)
