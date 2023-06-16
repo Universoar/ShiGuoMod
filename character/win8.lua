@@ -181,19 +181,21 @@ end
 
 --- Renders text on screen to show what cards can be merged into for Win8, if possible ---
 function win8_module.winShowCard()
-    local f = Font()
-    f:Load("font/teammeatfont10.fnt")
     local player = Isaac.GetPlayer(0)
     if player:GetName() == "Win8"
         and player:GetCard(0) * player:GetCard(1) ~= 0
         and player:GetCard(0) < 23
         and player:GetCard(1) < 23 then
+        local f = Font()
+        f:Load("font/teammeatfont10.fnt")
         local row = player:GetCard(0)
         local col = player:GetCard(1)
+        local textVector = Vector(10, 470)
+        local screenpos = Isaac.WorldToScreen(textVector)
         if cardMatrix[player:GetCard(0)][player:GetCard(1)] ~= 0 then
-            f:DrawString(cardList[cardMatrix[row][col]], 185, 270, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
+            f:DrawString(cardList[cardMatrix[row][col]], screenpos.X, screenpos.Y, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
         elseif cardMatrix[player:GetCard(1)][player:GetCard(0)] ~= 0 then
-            f:DrawString(cardList[cardMatrix[col][row]], 185, 270, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
+            f:DrawString(cardList[cardMatrix[col][row]], screenpos.X, screenpos.Y, KColor(1, 1, 1, 1, 0, 0, 0), 0, true)
         end
     end
 end
