@@ -22,22 +22,43 @@ function joh_module.johDisableActive()
 end
 
 --- Joh cannot change his active item to anything else ---
+local hadChanged = false
+local currentFrame = 0
 function joh_module.johChangeActive()
     local player = Isaac.GetPlayer(0)
-    if player:GetName() == "John" and player:GetActiveItem() ~= 705 then
+    if player:GetName() == "John" and player:GetActiveItem() == 0 then
         player:RemoveCollectible(player:GetActiveItem())
         player:AddCollectible(705)
-        player:AnimateSad()
-        SFXManager():Play(Isaac.GetSoundIdByName("oof"))
 
         local roomEntities = Isaac.GetRoomEntities()
-        for i, entity in pairs(roomEntities) do  --- Remove katana pickup
-            if entity.Type == EntityType.ENTITY_PICKUP 
+        for i, entity in pairs(roomEntities) do --- Remove katana pickup
+            if entity.Type == EntityType.ENTITY_PICKUP
                 and entity.Variant == PickupVariant.PICKUP_COLLECTIBLE
                 and entity.SubType == 705 then
-                    entity:Remove()
+                entity:Remove()
             end
         end
+    else
+        if player:GetName() == "John" and player:GetActiveItem() ~= 705 and not hadChanged then
+            player:RemoveCollectible(player:GetActiveItem())
+            player:AddCollectible(705)
+            hadChanged = true
+            currentFrame = Game():GetFrameCount()
+            player:AnimateSad()
+            SFXManager():Play(Isaac.GetSoundIdByName("oof"))
+
+            local roomEntities = Isaac.GetRoomEntities()
+            for i, entity in pairs(roomEntities) do --- Remove katana pickup
+                if entity.Type == EntityType.ENTITY_PICKUP
+                    and entity.Variant == PickupVariant.PICKUP_COLLECTIBLE
+                    and entity.SubType == 705 then
+                    entity:Remove()
+                end
+            end
+        end
+    end
+    if player:GetName() == "John" and Game():GetFrameCount() > currentFrame + 120 then
+        hadChanged = false
     end
 end
 
@@ -50,6 +71,5 @@ function joh_module.unNameFunction1(_, mpgsc)
         end
     end
 end
-
 
 return joh_module
