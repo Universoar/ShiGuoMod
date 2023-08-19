@@ -1,5 +1,7 @@
 duo_module = {}
 
+duo_module.eggState = 0
+
 --- Give Duo a starting item 721 ---
 local isEasterEgg = false
 function duo_module.unNameFunction1(_, mpgsc)
@@ -15,6 +17,7 @@ function duo_module.unNameFunction1(_, mpgsc)
                 isEasterEgg = true
                 local easterEggChance = math.random()
                 if easterEggChance <= 0.5 and easterEggChance > 0 then --- Easter egg: give Duo 妈刀+硫磺火+剖腹产+科技X
+                    duo_module.eggState = 1
                     player:AddCollectible(114)
                     player:AddCollectible(118)
                     player:AddCollectible(395)
@@ -23,6 +26,7 @@ function duo_module.unNameFunction1(_, mpgsc)
                     player:AnimateHappy()
                     SFXManager():Play(Isaac.GetSoundIdByName("bigbrain"))
                 elseif easterEggChance <= 1 and easterEggChance > 0.5 then --- Easter egg: give Duo 鞭子 化身为Van
+                    duo_module.eggState = 2
                     player:AddCollectible(722)
                     player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/duo_hairs/character_009_edenhair25.anm2"))
                     player:AnimateHappy()
